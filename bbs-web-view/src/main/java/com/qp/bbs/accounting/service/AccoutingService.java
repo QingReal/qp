@@ -9,7 +9,7 @@ import com.qp.bbs.accouting.entity.Accounting;
 
 @Service
 public class AccoutingService {
-	
+	//here change
 	@Resource
 	private AccountingDao dao;
 	

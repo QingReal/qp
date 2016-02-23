@@ -7,7 +7,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Accounting {
-	
+//gaidongle ...
 	@Id
 	@GeneratedValue
 	private Long id;
