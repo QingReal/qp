@@ -19,19 +19,10 @@ public class BeanUtils {
 		for (int i = 0; i < fields.length; i++) {
 			field=fields[i];
 		    field.setAccessible(true);//修改访问权限
-<<<<<<< HEAD
 		    
 		    String name = field.getName();//获取属性的名字
 		    String val = field.get(obj) + " ";
-		    
-		    
 		    if(val != null && !"".equals(val.trim())&& !"0".equals(val.trim())){
-		    	
-=======
-		    String name = field.getName();//获取属性的名字
-		    String val = (String)field.get(obj);
-		    if(val != null && !"".equals(val)){
->>>>>>> branch 'master' of https://github.com/QingReal/qp.git
 		    	SimpleExpression simpleExpression = Restrictions.eq(name, val);
 		    	filters.add(simpleExpression);
 		    }
