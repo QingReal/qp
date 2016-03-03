@@ -57,6 +57,9 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
     
     @Transactional(rollbackFor={Exception.class})
 	public Page list(T obj,int pageNo,int pageSize){
+<<<<<<< HEAD
+		return dao.list(obj, pageNo, pageSize,null);
+=======
 		List<SimpleExpression> filters = null;
 		try {
 			filters = BeanUtils.generatorFilter(obj);
@@ -68,6 +71,7 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
 			e.printStackTrace();
 		}
 		return dao.list(obj, pageNo, pageSize,filters);
+>>>>>>> branch 'master' of https://github.com/QingReal/qp.git
 	}
 
 }
