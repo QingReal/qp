@@ -22,7 +22,7 @@ public class UserController {
 	public ModelAndView index(HttpServletRequest request){
 		Page page =  service.list(new User(), 1, 10);
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("user/list");
+		mv.setViewName("common/layout");
 		mv.addObject("list",page.getResult());
 		return mv;
 	}

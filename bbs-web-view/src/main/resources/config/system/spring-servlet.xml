@@ -24,6 +24,7 @@
        </context:component-scan>
 	   <!-- 启动组件扫描，排除@Service组件，该组件由SpringMVC配置文件扫描 -->
 	   <mvc:annotation-driven /> 
+	   <mvc:resources mapping="/resources/**" location="/resources/" />
 		
        <!-- 完成请求和注解POJO的映射 -->
        <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>
