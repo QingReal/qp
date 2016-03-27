@@ -1,6 +1,5 @@
 package com.qp.core.user.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
@@ -13,39 +12,29 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-
 /**
- * @Title: qp-user实体类
+ * @Title: qp-role实体类
  * @author Qing
  */
 @Entity
-@Table(name = "qp_user")
-public class User implements Serializable{
-
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+@Table(name = "qp_role")
+public class Role {
+	
 	
 	private Long id;
 	
 	private String name;
 	
-	private String password;
-	
-	private String email;
-	
-	private String sex;
-	
 	private Date createDate;
 	
 	private Date modifyDate;
-	
-	private int status;
 
-	private Set<Role> roles;
+	private int status;
 	
+	private Set<User> users;
+	
+	private Set<Permission> permissions;
+
 	@Id
 	@GeneratedValue
 	public Long getId() {
@@ -62,30 +51,6 @@ public class User implements Serializable{
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getSex() {
-		return sex;
-	}
-
-	public void setSex(String sex) {
-		this.sex = sex;
 	}
 
 	public Date getCreateDate() {
@@ -111,28 +76,30 @@ public class User implements Serializable{
 	public void setStatus(int status) {
 		this.status = status;
 	}
+	
+	@ManyToMany(mappedBy="roles",cascade=CascadeType.ALL)
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
+	}
 
 	@ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(
-            name="qp_user_role",
-            joinColumns=@JoinColumn(name="user_id"),
-            inverseJoinColumns=@JoinColumn(name="role_id")
+            name="qp_role_permisson",
+            joinColumns=@JoinColumn(name="role_id"),
+            inverseJoinColumns=@JoinColumn(name="permission_id")
     )
-	public Set<Role> getRoles() {
-		return roles;
+	public Set<Permission> getPermissions() {
+		return permissions;
 	}
 
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
+	public void setPermissions(Set<Permission> permissions) {
+		this.permissions = permissions;
 	}
-
 	
-
 	
 
-	
-	
-	
-	
-	
 }

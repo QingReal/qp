@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- 配置缓存管理器 -->
+	 <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+        <property name="cacheManagerConfigFile" value="classpath:config/system/ehcache.xml"/>
+     </bean>
+	 
+	 <!-- 鉴权授权realm -->    
+     <bean id="appRealm" class="com.qp.core.base.realm.AppRealm"/>
+
+     <!-- shiro securityManager bean -->
+     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="cacheManager" ref="cacheManager"/>
+        <!-- Single realm app.  If you have multiple realms, use the 'realms' property instead. -->
+        <property name="realm" ref="appRealm"/>
+    </bean>
+    
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+    
+    
+    
+    <!-- shiro过滤器 -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <!-- 默认登录页 -->
+        <property name="loginUrl" value="/index.jsp"/>
+        <property name="successUrl" value="/page/index.ftl"/>
+        <property name="unauthorizedUrl" value="/page/unauthorized.jsp"/>
+        <property name="filterChainDefinitions">
+            <value>
+            	/index.jsp = anon
+            	/admin/index.do = anon
+            	/page/index.ftl = anon
+            	/user/login.do = anon
+            	/** = authc
+            </value>
+        </property>
+    </bean>
+	   
+</beans>

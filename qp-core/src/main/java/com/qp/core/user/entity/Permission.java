@@ -8,42 +8,33 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 
 /**
- * @Title: qp-user实体类
+ * @Title: qp-permission实体类
  * @author Qing
  */
 @Entity
-@Table(name = "qp_user")
-public class User implements Serializable{
-
+@Table(name = "qp_permission")
+public class Permission implements Serializable{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private Long id;
 	
 	private String name;
-	
-	private String password;
-	
-	private String email;
-	
-	private String sex;
 	
 	private Date createDate;
 	
 	private Date modifyDate;
 	
 	private int status;
-
+	
 	private Set<Role> roles;
 	
 	@Id
@@ -62,30 +53,6 @@ public class User implements Serializable{
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getSex() {
-		return sex;
-	}
-
-	public void setSex(String sex) {
-		this.sex = sex;
 	}
 
 	public Date getCreateDate() {
@@ -112,12 +79,7 @@ public class User implements Serializable{
 		this.status = status;
 	}
 
-	@ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(
-            name="qp_user_role",
-            joinColumns=@JoinColumn(name="user_id"),
-            inverseJoinColumns=@JoinColumn(name="role_id")
-    )
+	@ManyToMany(mappedBy="permissions",cascade=CascadeType.ALL)
 	public Set<Role> getRoles() {
 		return roles;
 	}
@@ -125,13 +87,6 @@ public class User implements Serializable{
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
-
-	
-
-	
-
-	
-	
 	
 	
 	

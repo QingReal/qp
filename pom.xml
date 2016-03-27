@@ -34,6 +34,18 @@
 			<version>4.2.3.RELEASE</version>
 		</dependency>
 		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>4.2.3.RELEASE</version>
+		</dependency>
+		<!-- spring hateoas 构建restful服务-->
+		<dependency>
+			<groupId>org.springframework.hateoas</groupId>
+			<artifactId>spring-hateoas</artifactId>
+			<version>0.19.0.RELEASE</version>
+		</dependency>
+		
 		<!-- logback 日志 -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -86,6 +98,38 @@
 	        <artifactId>hibernate-entitymanager</artifactId>
 	        <version>4.3.5.Final</version>
 	    </dependency>
+	    
+	    <!-- shiro安全验证框架 -->
+	    <dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-core</artifactId>
+			<version>1.2.4</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-web</artifactId>
+			<version>1.2.4</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-ehcache</artifactId>
+			<version>1.2.4</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-spring</artifactId>
+			<version>1.2.4</version>
+		</dependency>
+		
+	    <!-- freemarker 模板引擎 -->
+	    <dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>2.3.23</version>
+		</dependency>
 		
   	
   </dependencies>

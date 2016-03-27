@@ -113,4 +113,14 @@ public class Page implements Serializable {
 	public static int getStartOfPage(int pageNo, int pageSize) {
 		return (pageNo - 1) * pageSize;
 	}
+
+	public List getData() {
+		return data;
+	}
+
+	public void setData(List data) {
+		this.data = data;
+	}
+	
+	
 }

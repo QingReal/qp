@@ -1,8 +1,6 @@
-<html>
-<body>
-<h2>Hello World!</h2>
-<form action="user/list.do" method="post">
-	<input type="submit" value="sure">
-</form>
-</body>
-</html>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<%
+   String base = request.getContextPath();
+   response.sendRedirect(base+"/admin/index.do");
+%>

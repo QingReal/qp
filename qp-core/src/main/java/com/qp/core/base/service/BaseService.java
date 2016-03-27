@@ -11,7 +11,7 @@ public interface BaseService<T> {
 	@Transactional
 	void update(T obj);
 	@Transactional
-	Page list(T obj,int pageNo,int pageSize);
+	Page list(int pageNo,int pageSize);
 	@Transactional
 	T read(Long id);
 	@Transactional

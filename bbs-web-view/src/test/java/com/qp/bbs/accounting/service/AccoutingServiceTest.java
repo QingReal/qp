@@ -1,39 +1,64 @@
 package com.qp.bbs.accounting.service;
 
+
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
+import org.apache.shiro.util.ThreadContext;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-
-import com.qp.core.base.entity.Page;
+import com.qp.core.user.entity.Permission;
+import com.qp.core.user.entity.Role;
 import com.qp.core.user.entity.User;
 import com.qp.core.user.service.UserService;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)  
-@ContextConfiguration(locations = {"classpath:/config/system/applicationContext.xml","classpath:/config/system/spring-servlet.xml"})  
+@ContextConfiguration(locations = {"classpath:/config/system/applicationContext.xml","classpath:/config/system/applicationContext-shiro.xml","classpath:/config/system/applicationContext-shiro-test.xml"})  
 public class AccoutingServiceTest extends AbstractTransactionalJUnit4SpringContextTests {
 	
 	@Resource
-
 	private UserService userService;
-	@Test
-	public void testAdd(){
-		Page page = userService.list(new User(), 1, 2);
-		System.out.println("×ÜÊý£º"+page.getTotalCount());
-		System.out.println("×ÜÒ³£º"+page.getTotalPageCount());
-		System.out.println("µ±Ç°Ò³£º"+page.getCurrentPageNo());
-		List list  = page.getResult();
-		for(int i=0;i<list.size();i++){
-			System.out.println("list"+i+"£º"+((User)list.get(i)).getName());
-		}
-
+	@Resource
+	private org.apache.shiro.mgt.SecurityManager securityManager ;
+	
+	@Before
+	public void setup(){
+		ThreadContext.bind(securityManager);
 	}
+	
+	@Test
+	@Rollback(false)
+	public void testAdd(){
+		User u = new User();
+		u.setName("å°æ˜Ž");
+		u.setEmail("123@qq.com");
+		u.setPassword("123456");
+		Role role = new Role();
+		role.setName("ç®¡ç†å‘˜");
+		Permission permission = new Permission();
+		permission.setName("å¢žåŠ ");
+		Set<Permission> permissions = new HashSet<Permission>();
+		role.setPermissions(permissions);
+		Set<Role> roles = new HashSet<Role>();
+		roles.add(role);
+		
+		u.setRoles(roles);
+		
+		
+		userService.save(u);
+		//System.out.println(userService.getUser("123@qq.com").getName());
+	}
+	
 	
 }

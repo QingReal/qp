@@ -14,7 +14,7 @@ import com.qp.core.base.entity.Page;
 import com.qp.core.base.service.BaseService;
 import com.qp.core.base.util.BeanUtils;
 
-public abstract class BaseServiceImpl<T> implements BaseService<T> {
+public class BaseServiceImpl<T> implements BaseService<T> {
 	
 	
 	@Resource 
@@ -50,14 +50,29 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
 		return dao.read(id,clazz);
 	}
     
+    @Transactional(readOnly=true)
+	public List<T> read(SimpleExpression filter){
+		return dao.read(clazz, filter);
+	}
+    
+    @Transactional(readOnly=true)
+	public List<T> read(List<SimpleExpression> filters){
+		return dao.read(clazz,filters);
+	}
+    
     @Transactional(rollbackFor={Exception.class})
 	public void delete(T obj){
 		dao.delete(obj);
 	}
     
     @Transactional(rollbackFor={Exception.class})
-	public Page list(T obj,int pageNo,int pageSize){
-		return dao.list(obj, pageNo, pageSize,null);
+	public Page list(int pageNo,int pageSize){
+		return dao.list(clazz, pageNo, pageSize,null);
 	}
 
+	public BaseDao<T> getDao() {
+		return dao;
+	}
+
+    
 }

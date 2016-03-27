@@ -62,12 +62,42 @@ public class BaseDao <T>{
 	}
 	
 	/**
-	 * 列表
+	 * 多条件查询
+	 * @param obj
+	 * @param filters
+	 * @return
+	 */
+	public List<T> read(Class<T> type,List<SimpleExpression> filters){
+		Criteria criteria = getSession().createCriteria(type);
+		if(filters != null){
+			for (SimpleExpression filter : filters) {
+				criteria.add(filter);
+			}
+		}	
+		return criteria.list();
+	}
+	
+	/**
+	 * 单条件查询
+	 * @param obj
+	 * @param filters
+	 * @return
+	 */
+	public List<T> read(Class<T> type,SimpleExpression filter){
+		Criteria criteria = getSession().createCriteria(type);
+		if(filter != null){
+			criteria.add(filter);
+		}	
+		return criteria.list();
+	}
+	
+	/**
+	 * 分页列表
 	 */
 	@Transactional
-	public Page list(T obj, int pageNo, int pageSize,List<SimpleExpression> filters) {
+	public Page list(Class<T> type, int pageNo, int pageSize,List<SimpleExpression> filters) {
 		
-		Criteria criteria = getSession().createCriteria(obj.getClass());		
+		Criteria criteria = getSession().createCriteria(type);		
 		// 查询初始下标
 		int start = Page.getStartOfPage(pageNo, pageSize);
 		// 设置起始结果数
@@ -83,15 +113,15 @@ public class BaseDao <T>{
 		// 查询数据集合
 		List<T> list = criteria.list();
 		// 查询数据总数
-		long totalCount = getCount(obj);
+		long totalCount = getCount(type);
 		
 		return new Page(start,totalCount,pageSize,list);
 	}
 	/**
 	 * 结果集总数
 	 */
-	public Long getCount(T obj){
-		Criteria criteria = getSession().createCriteria(obj.getClass());		
+	public Long getCount(Class<T> type){
+		Criteria criteria = getSession().createCriteria(type);		
 		return (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();
 	}
 

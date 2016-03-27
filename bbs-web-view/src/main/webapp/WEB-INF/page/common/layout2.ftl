@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="utf-8"%>
 <!DOCTYPE>
 <html>
 	
@@ -8,16 +6,13 @@
 		<title>Insert title here</title>
 		
 	</head>
-	
-	<!-- 新 Bootstrap 核心 CSS 文件 -->
+
 	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
-	<link href="<%=request.getContextPath()%>/resources/system/css/custom.css" rel="stylesheet" type="text/css" />
+	<link href="${rc.contextPath}/resources/system/css/custom.css" rel="stylesheet" type="text/css" />
 	
-	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 	<script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
 	
-	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 	<script src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<body>
 		<div class="col-lg-2 left-base no-padding no-margin">
@@ -28,8 +23,8 @@
 		  	</div>
 		  	<div class="left-bar">
 		  		<ul class="no-padding no-margin">
-		  			<li>1级菜单</li>
-		  			<li>1级菜单</li>
+		  			<li>一级标题</li>
+		  			<li>一级标题</li>
 		  		</ul>
 				
 		  	</div>
@@ -43,7 +38,7 @@
 		  	</div>
 		  	
 		  	<ol class="breadcrumb right-path">
-				<li><a href="#">主页</a></li>
+				<li><a href="#">面包屑</a></li>
 				<li><a href="#">面包屑</a></li>
 				<li class="active">面包屑</li>
 			</ol>
@@ -55,7 +50,7 @@
 							<tr>
 								<td>编号</td>
 								<td>编号</td>
-								<td>编号</td>
+ 								<td>编号</td>
 								<td>编号</td>
 							</tr>
 						</thead>
